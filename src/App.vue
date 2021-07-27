@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <my-hello v-for='l in leaders' :name="l" :key="l" 
+      @leaderremove="doRemove(l)"></my-hello>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MyHello from './components/my-hello';
 
 export default {
   name: 'App',
+  data: function() {
+    return {
+      leaders: ['Steve', 'Trong', 'Bill', 'Obama']
+    }
+  },
+  methods: {
+    doRemove: function(name) {
+      console.log('do remove');
+      console.log(name);
+      let index = this.leaders.findIndex((item) => item === name);
+      this.leaders.splice(index, 1);
+    }
+  },
   components: {
-    HelloWorld
+    MyHello
   }
 }
 </script>
